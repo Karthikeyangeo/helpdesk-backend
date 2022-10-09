@@ -9,8 +9,12 @@ mongoose.connect(dbUrl)
 // GET issue type model
 router.get('/issue-types',async(req,res)=>{
   try {
-    let issueTypes = await issueTypeModel.find();
+    let issues_types = await issueTypeModel.find({},{'issue_type':1,'_id':0})
+    let issueTypes = [];
 
+    issues_types.map((e)=>{
+      issueTypes.push(e.issue_type)
+    })
     res.send({
       statusCode:200,
       issueTypes
